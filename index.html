@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css">
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css">
+        <style>
+        #map {
+            width: 876px;
+            height: 748px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="js/leaflet.markercluster.js"></script>
+        <script src="data/tampines_subzonelabel_1.js"></script>
+        <script src="data/silverzn_suitability_map_vector_clipped_2.js"></script>
+        <script src="data/tampeast_residential_3.js"></script>
+        <script src="data/listofclinicstampeast_4.js"></script>
+        <script src="data/listofeldercareservicestampeast_5.js"></script>
+        <script src="data/listofparkstampeast_6.js"></script>
+        <script src="data/tampines_silver_zones_7.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:21, minZoom:15
+        }).fitBounds([[1.339607433019955,103.93491473360882],[1.3673518174478656,103.96721058369808]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        var layer_OpenStreetMap_0 = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 15,
+            maxZoom: 21,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OpenStreetMap_0;
+        map.addLayer(layer_OpenStreetMap_0);
+        function pop_tampines_subzonelabel_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? Autolinker.link(String(feature.properties['fid'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? Autolinker.link(String(feature.properties['OBJECTID'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SUBZONE_NO'] !== null ? Autolinker.link(String(feature.properties['SUBZONE_NO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SUBZONE_N'] !== null ? Autolinker.link(String(feature.properties['SUBZONE_N'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SUBZONE_C'] !== null ? Autolinker.link(String(feature.properties['SUBZONE_C'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CA_IND'] !== null ? Autolinker.link(String(feature.properties['CA_IND'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PLN_AREA_N'] !== null ? Autolinker.link(String(feature.properties['PLN_AREA_N'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PLN_AREA_C'] !== null ? Autolinker.link(String(feature.properties['PLN_AREA_C'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['REGION_N'] !== null ? Autolinker.link(String(feature.properties['REGION_N'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['REGION_C'] !== null ? Autolinker.link(String(feature.properties['REGION_C'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['INC_CRC'] !== null ? Autolinker.link(String(feature.properties['INC_CRC'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FMEL_UPD_D'] !== null ? Autolinker.link(String(feature.properties['FMEL_UPD_D'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['X_ADDR'] !== null ? Autolinker.link(String(feature.properties['X_ADDR'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Y_ADDR'] !== null ? Autolinker.link(String(feature.properties['Y_ADDR'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_Leng'] !== null ? Autolinker.link(String(feature.properties['SHAPE_Leng'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SHAPE_Area'] !== null ? Autolinker.link(String(feature.properties['SHAPE_Area'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_tampines_subzonelabel_1_0(feature) {
+            switch(String(feature.properties['SUBZONE_N'])) {
+                case 'SIMEI':
+                    return {
+                pane: 'pane_tampines_subzonelabel_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fillOpacity: 0,
+                interactive: false,
+            }
+                    break;
+                case 'TAMPINES EAST':
+                    return {
+                pane: 'pane_tampines_subzonelabel_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fillOpacity: 0,
+                interactive: false,
+            }
+                    break;
+                case 'TAMPINES NORTH':
+                    return {
+                pane: 'pane_tampines_subzonelabel_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,251,216,0.0)',
+                interactive: false,
+            }
+                    break;
+                case 'TAMPINES WEST':
+                    return {
+                pane: 'pane_tampines_subzonelabel_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,251,216,0.0)',
+                interactive: false,
+            }
+                    break;
+                case 'XILIN':
+                    return {
+                pane: 'pane_tampines_subzonelabel_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,251,216,0.0)',
+                interactive: false,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_tampines_subzonelabel_1');
+        map.getPane('pane_tampines_subzonelabel_1').style.zIndex = 401;
+        map.getPane('pane_tampines_subzonelabel_1').style['mix-blend-mode'] = 'normal';
+        var layer_tampines_subzonelabel_1 = new L.geoJson(json_tampines_subzonelabel_1, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_tampines_subzonelabel_1',
+            layerName: 'layer_tampines_subzonelabel_1',
+            pane: 'pane_tampines_subzonelabel_1',
+            onEachFeature: pop_tampines_subzonelabel_1,
+            style: style_tampines_subzonelabel_1_0,
+        });
+        bounds_group.addLayer(layer_tampines_subzonelabel_1);
+        map.addLayer(layer_tampines_subzonelabel_1);
+        function pop_silverzn_suitability_map_vector_clipped_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? Autolinker.link(String(feature.properties['fid'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DN'] !== null ? Autolinker.link(String(feature.properties['DN'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_silverzn_suitability_map_vector_clipped_2_0(feature) {
+            switch(String(feature.properties['DN'])) {
+                case '0':
+                    return {
+                pane: 'pane_silverzn_suitability_map_vector_clipped_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 1.0,
+                fillOpacity: 0,
+                interactive: false,
+            }
+                    break;
+                case '1':
+                    return {
+                pane: 'pane_silverzn_suitability_map_vector_clipped_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,1.0)',
+                interactive: false,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_silverzn_suitability_map_vector_clipped_2');
+        map.getPane('pane_silverzn_suitability_map_vector_clipped_2').style.zIndex = 402;
+        map.getPane('pane_silverzn_suitability_map_vector_clipped_2').style['mix-blend-mode'] = 'normal';
+        var layer_silverzn_suitability_map_vector_clipped_2 = new L.geoJson(json_silverzn_suitability_map_vector_clipped_2, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_silverzn_suitability_map_vector_clipped_2',
+            layerName: 'layer_silverzn_suitability_map_vector_clipped_2',
+            pane: 'pane_silverzn_suitability_map_vector_clipped_2',
+            onEachFeature: pop_silverzn_suitability_map_vector_clipped_2,
+            style: style_silverzn_suitability_map_vector_clipped_2_0,
+        });
+        bounds_group.addLayer(layer_silverzn_suitability_map_vector_clipped_2);
+        map.addLayer(layer_silverzn_suitability_map_vector_clipped_2);
+        function pop_tampeast_residential_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? Autolinker.link(String(feature.properties['fid'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['osm_id'] !== null ? Autolinker.link(String(feature.properties['osm_id'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name'] !== null ? Autolinker.link(String(feature.properties['name'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['type'] !== null ? Autolinker.link(String(feature.properties['type'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['POI_CODE'] !== null ? Autolinker.link(String(feature.properties['POI_CODE'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_tampeast_residential_3_0() {
+            return {
+                pane: 'pane_tampeast_residential_3',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(242,181,137,1.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_tampeast_residential_3');
+        map.getPane('pane_tampeast_residential_3').style.zIndex = 403;
+        map.getPane('pane_tampeast_residential_3').style['mix-blend-mode'] = 'normal';
+        var layer_tampeast_residential_3 = new L.geoJson(json_tampeast_residential_3, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_tampeast_residential_3',
+            layerName: 'layer_tampeast_residential_3',
+            pane: 'pane_tampeast_residential_3',
+            onEachFeature: pop_tampeast_residential_3,
+            style: style_tampeast_residential_3_0,
+        });
+        bounds_group.addLayer(layer_tampeast_residential_3);
+        map.addLayer(layer_tampeast_residential_3);
+        function pop_listofclinicstampeast_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? Autolinker.link(String(feature.properties['fid'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>pharmacy_n</strong><br />' + (feature.properties['pharmacy_n'] !== null ? Autolinker.link(String(feature.properties['pharmacy_n'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['pharmacy_a'] !== null ? Autolinker.link(String(feature.properties['pharmacy_a'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['postal_cod'] !== null ? Autolinker.link(String(feature.properties['postal_cod'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['POI_CODE'] !== null ? Autolinker.link(String(feature.properties['POI_CODE'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_listofclinicstampeast_4_0() {
+            return {
+                pane: 'pane_listofclinicstampeast_4',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(72,93,210,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_listofclinicstampeast_4');
+        map.getPane('pane_listofclinicstampeast_4').style.zIndex = 404;
+        map.getPane('pane_listofclinicstampeast_4').style['mix-blend-mode'] = 'normal';
+        var layer_listofclinicstampeast_4 = new L.geoJson(json_listofclinicstampeast_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_listofclinicstampeast_4',
+            layerName: 'layer_listofclinicstampeast_4',
+            pane: 'pane_listofclinicstampeast_4',
+            onEachFeature: pop_listofclinicstampeast_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_listofclinicstampeast_4_0(feature));
+            },
+        });
+        var cluster_listofclinicstampeast_4 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_listofclinicstampeast_4.addLayer(layer_listofclinicstampeast_4);
+
+        bounds_group.addLayer(layer_listofclinicstampeast_4);
+        cluster_listofclinicstampeast_4.addTo(map);
+        function pop_listofeldercareservicestampeast_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? Autolinker.link(String(feature.properties['fid'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Name</strong><br />' + (feature.properties['Name'] !== null ? Autolinker.link(String(feature.properties['Name'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['description'] !== null ? Autolinker.link(String(feature.properties['description'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['timestamp'] !== null ? Autolinker.link(String(feature.properties['timestamp'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['begin'] !== null ? Autolinker.link(String(feature.properties['begin'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['end'] !== null ? Autolinker.link(String(feature.properties['end'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['altitudeMode'] !== null ? Autolinker.link(String(feature.properties['altitudeMode'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tessellate'] !== null ? Autolinker.link(String(feature.properties['tessellate'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['extrude'] !== null ? Autolinker.link(String(feature.properties['extrude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['visibility'] !== null ? Autolinker.link(String(feature.properties['visibility'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['drawOrder'] !== null ? Autolinker.link(String(feature.properties['drawOrder'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['icon'] !== null ? Autolinker.link(String(feature.properties['icon'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['snippet'] !== null ? Autolinker.link(String(feature.properties['snippet'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['POI_CODE'] !== null ? Autolinker.link(String(feature.properties['POI_CODE'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_listofeldercareservicestampeast_5_0() {
+            return {
+                pane: 'pane_listofeldercareservicestampeast_5',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(251,0,17,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_listofeldercareservicestampeast_5');
+        map.getPane('pane_listofeldercareservicestampeast_5').style.zIndex = 405;
+        map.getPane('pane_listofeldercareservicestampeast_5').style['mix-blend-mode'] = 'normal';
+        var layer_listofeldercareservicestampeast_5 = new L.geoJson(json_listofeldercareservicestampeast_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_listofeldercareservicestampeast_5',
+            layerName: 'layer_listofeldercareservicestampeast_5',
+            pane: 'pane_listofeldercareservicestampeast_5',
+            onEachFeature: pop_listofeldercareservicestampeast_5,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_listofeldercareservicestampeast_5_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_listofeldercareservicestampeast_5);
+        map.addLayer(layer_listofeldercareservicestampeast_5);
+        function pop_listofparkstampeast_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? Autolinker.link(String(feature.properties['fid'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>Name</strong><br />' + (feature.properties['Name'] !== null ? Autolinker.link(String(feature.properties['Name'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['description'] !== null ? Autolinker.link(String(feature.properties['description'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['timestamp'] !== null ? Autolinker.link(String(feature.properties['timestamp'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['begin'] !== null ? Autolinker.link(String(feature.properties['begin'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['end'] !== null ? Autolinker.link(String(feature.properties['end'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['altitudeMode'] !== null ? Autolinker.link(String(feature.properties['altitudeMode'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['tessellate'] !== null ? Autolinker.link(String(feature.properties['tessellate'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['extrude'] !== null ? Autolinker.link(String(feature.properties['extrude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['visibility'] !== null ? Autolinker.link(String(feature.properties['visibility'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['drawOrder'] !== null ? Autolinker.link(String(feature.properties['drawOrder'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['icon'] !== null ? Autolinker.link(String(feature.properties['icon'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['snippet'] !== null ? Autolinker.link(String(feature.properties['snippet'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['POI_CODE'] !== null ? Autolinker.link(String(feature.properties['POI_CODE'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_listofparkstampeast_6_0() {
+            return {
+                pane: 'pane_listofparkstampeast_6',
+                radius: 8.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(60,167,1,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_listofparkstampeast_6');
+        map.getPane('pane_listofparkstampeast_6').style.zIndex = 406;
+        map.getPane('pane_listofparkstampeast_6').style['mix-blend-mode'] = 'normal';
+        var layer_listofparkstampeast_6 = new L.geoJson(json_listofparkstampeast_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_listofparkstampeast_6',
+            layerName: 'layer_listofparkstampeast_6',
+            pane: 'pane_listofparkstampeast_6',
+            onEachFeature: pop_listofparkstampeast_6,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_listofparkstampeast_6_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_listofparkstampeast_6);
+        map.addLayer(layer_listofparkstampeast_6);
+        function pop_tampines_silver_zones_7(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['fid'] !== null ? Autolinker.link(String(feature.properties['fid'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['SITENAME'] !== null ? Autolinker.link(String(feature.properties['SITENAME'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['INC_CRC'] !== null ? Autolinker.link(String(feature.properties['INC_CRC'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FMEL_UPD_D'] !== null ? Autolinker.link(String(feature.properties['FMEL_UPD_D'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['POI_CODE'] !== null ? Autolinker.link(String(feature.properties['POI_CODE'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_tampines_silver_zones_7_0() {
+            return {
+                pane: 'pane_tampines_silver_zones_7',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(82,82,82,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_tampines_silver_zones_7');
+        map.getPane('pane_tampines_silver_zones_7').style.zIndex = 407;
+        map.getPane('pane_tampines_silver_zones_7').style['mix-blend-mode'] = 'normal';
+        var layer_tampines_silver_zones_7 = new L.geoJson(json_tampines_silver_zones_7, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_tampines_silver_zones_7',
+            layerName: 'layer_tampines_silver_zones_7',
+            pane: 'pane_tampines_silver_zones_7',
+            onEachFeature: pop_tampines_silver_zones_7,
+            style: style_tampines_silver_zones_7_0,
+        });
+        bounds_group.addLayer(layer_tampines_silver_zones_7);
+        map.addLayer(layer_tampines_silver_zones_7);
+        setBounds();
+        var i = 0;
+        layer_tampines_subzonelabel_1.eachLayer(function(layer) {
+            var context = {
+                feature: layer.feature,
+                variables: {}
+            };
+            layer.bindTooltip((layer.feature.properties['SUBZONE_N'] !== null?String('<div style="color: #000000; font-size: 20pt; font-family: \'Franklin Gothic Book\', sans-serif;">' + layer.feature.properties['SUBZONE_N']) + '</div>':''), {permanent: true, offset: [-0, -16], className: 'css_tampines_subzonelabel_1'});
+            labels.push(layer);
+            totalMarkers += 1;
+              layer.added = true;
+              addLabel(layer, i);
+              i++;
+        });
+        resetLabels([layer_tampines_subzonelabel_1]);
+        map.on("zoomend", function(){
+            resetLabels([layer_tampines_subzonelabel_1]);
+        });
+        map.on("layeradd", function(){
+            resetLabels([layer_tampines_subzonelabel_1]);
+        });
+        map.on("layerremove", function(){
+            resetLabels([layer_tampines_subzonelabel_1]);
+        });
+        </script>
+    </body>
+</html>
