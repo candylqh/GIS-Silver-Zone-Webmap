@@ -1,1 +1,1 @@
-Web Map to show suitable locations to build Silver Zones in Tampines East. View the webmap via index.html
+Web Map to show suitable locations to build Silver Zones in Tampines East. View the webmap here: https://candylqh.github.io/GIS_silverzone
